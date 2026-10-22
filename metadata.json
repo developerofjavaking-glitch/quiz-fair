@@ -1,0 +1,7 @@
+{
+  "name": "ধাঁধার মেলা",
+  "description": "বাংলা ধাঁধা ও কুইজের এক বিশাল মেলা—১০০০+ প্রশ্ন, কয়েন, দোকান ও আনন্দময় খেলা।",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
