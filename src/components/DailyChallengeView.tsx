@@ -158,13 +158,18 @@ export const DailyChallengeView: React.FC<DailyChallengeViewProps> = ({
                 key={idx}
                 disabled={isAnswered}
                 onClick={() => handleOptionClick(idx)}
-                className={`p-4 rounded-xl border text-left text-sm sm:text-base font-medium transition-all flex items-center justify-between gap-2 active:scale-98 ${style}`}
+                className={`p-4 rounded-xl border text-left text-sm sm:text-base font-medium transition-all flex items-center justify-between gap-3 active:scale-98 ${style}`}
               >
-                <span>{opt}</span>
+                <div className="flex items-center gap-2.5">
+                  <span className="w-7 h-7 rounded-lg bg-amber-500/20 border border-amber-400/30 flex items-center justify-center text-xs font-bold text-amber-200 shrink-0">
+                    {['ক', 'খ', 'গ', 'ঘ'][idx]}
+                  </span>
+                  <span>{opt}</span>
+                </div>
                 {isAnswered && (
                   <div>
-                    {isAnsCorrect && <CheckCircle2 className="w-5 h-5 text-emerald-300" />}
-                    {isSelected && !isAnsCorrect && <XCircle className="w-5 h-5 text-rose-300" />}
+                    {isAnsCorrect && <CheckCircle2 className="w-5 h-5 text-emerald-300 shrink-0" />}
+                    {isSelected && !isAnsCorrect && <XCircle className="w-5 h-5 text-rose-300 shrink-0" />}
                   </div>
                 )}
               </button>

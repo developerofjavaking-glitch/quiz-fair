@@ -25,11 +25,25 @@ function addQ(
   hint: string,
   exp: string
 ) {
+  const correctText = opts[ans];
+  // Calculate randomized target position in 0, 1, 2, 3 so answers are evenly distributed
+  const targetPos = (currentId * 7 + (currentId % 3) * 2 + 1) % 4;
+  const wrongOptions = opts.filter((_, idx) => idx !== ans);
+
+  const shuffledOpts: [string, string, string, string] = ['', '', '', ''];
+  shuffledOpts[targetPos] = correctText;
+  let wrongIdx = 0;
+  for (let i = 0; i < 4; i++) {
+    if (i !== targetPos) {
+      shuffledOpts[i] = wrongOptions[wrongIdx++];
+    }
+  }
+
   questions.push({
     id: currentId++,
     question: q,
-    options: opts,
-    answerIndex: ans,
+    options: shuffledOpts,
+    answerIndex: targetPos,
     category: cat,
     difficulty: diff,
     hint: hint,
@@ -674,7 +688,7 @@ for (const item of islamicAndMoralFacts) {
 }
 
 // Generate Fun General Riddles for Kids & Family (200 variations)
-const funFamilyRiddles = [
+const funFamilyRiddles: [string, [string, string, string, string], number, string, string][] = [
   ['কোন পাখির চোখ তার মস্তিষ্কের চেয়েও বড়?', ['উটপাখি', 'ঈগল', 'পেঁচা', 'ময়ূর'], 0, 'বিশ্বের বৃহত্তম পাখি।', 'উটপাখির চোখ আকারে প্রায় ২ ইঞ্চি চওড়া যা তার মস্তিষ্কের চেয়েও বড়।'],
   ['কোন প্রাণী কখনো ঘুমায় না?', ['বুলফ্রগ (এক প্রকার বড় ব্যাঙ)', 'শামুক', 'মাছি', 'পিঁপড়া'], 0, 'সদা জাগ্রত জলচর প্রাণী।', 'গবেষণায় দেখা গেছে বুলফ্রগ প্রতিকূল পরিস্থিতিতেও সম্পূর্ণ অচেতন ঘুমায় না।'],
   ['কোন প্রাণী একটানা ৩ বছর পর্যন্ত ঘুমাতে পারে?', ['শামুক', 'কচ্ছপ', 'ভাল্লুক', 'সাপ'], 0, 'খোলসযুক্ত ধীরগতির জীব।', 'প্রতিকূল আর্দ্রতাহীন আবহাওয়ায় শামুক খোলসের ভেতর একটানা দীর্ঘকাল সুপ্তাবস্থায় থাকে।'],

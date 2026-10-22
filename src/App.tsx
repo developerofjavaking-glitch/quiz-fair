@@ -23,7 +23,7 @@ import { sounds } from './utils/sound';
 import { toBn } from './utils/bengali';
 import { fireConfetti } from './utils/confetti';
 import { loadUserStats, saveUserStats } from './utils/storage';
-import { Star, Trophy, ArrowRight, RotateCcw } from 'lucide-react';
+import { Star, Trophy, ArrowRight, RotateCcw, Home, Compass, Layers, Store, BookOpen } from 'lucide-react';
 
 export default function App() {
   const [stats, setStats] = useState<UserStats>(() => loadUserStats());
@@ -353,12 +353,84 @@ export default function App() {
       )}
 
       {/* Quiet Footer */}
-      <footer className="border-t border-amber-600/20 py-6 text-center text-xs text-amber-300/70 mt-auto">
+      <footer className="border-t border-amber-600/20 py-6 mb-16 md:mb-0 text-center text-xs text-amber-300/70 mt-auto">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <span>ধাঁধার মেলা © ২০২৬ · ১,০৫০+ বাংলা ধাঁধা ও কুইজ</span>
           <span>গ্রাম-বাংলা ও বিশ্ব জ্ঞানের বর্ণাঢ্য উৎসব</span>
         </div>
       </footer>
+
+      {/* Mobile Bottom Navigation Bar (md:hidden) */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-amber-950/95 backdrop-blur-md border-t border-amber-500/30 px-2 py-1.5 flex items-center justify-around shadow-lg text-amber-200">
+        <button
+          onClick={() => {
+            sounds.playClick();
+            setCurrentMode('HOME');
+          }}
+          className={`flex flex-col items-center gap-0.5 text-[10px] font-bold py-1 px-2 rounded-lg transition-colors ${
+            currentMode === 'HOME' ? 'text-amber-300 bg-amber-500/20' : 'text-amber-200/70'
+          }`}
+        >
+          <Home className="w-4 h-4" />
+          <span>প্রাঙ্গণ</span>
+        </button>
+
+        <button
+          onClick={() => {
+            sounds.playClick();
+            setCurrentMode('LEVELS');
+          }}
+          className={`flex flex-col items-center gap-0.5 text-[10px] font-bold py-1 px-2 rounded-lg transition-colors ${
+            currentMode === 'LEVELS' || currentMode === 'PLAY_LEVEL'
+              ? 'text-amber-300 bg-amber-500/20'
+              : 'text-amber-200/70'
+          }`}
+        >
+          <Compass className="w-4 h-4" />
+          <span>পরিক্রমা</span>
+        </button>
+
+        <button
+          onClick={() => {
+            sounds.playClick();
+            setCurrentMode('CATEGORY_SELECT');
+          }}
+          className={`flex flex-col items-center gap-0.5 text-[10px] font-bold py-1 px-2 rounded-lg transition-colors ${
+            currentMode === 'CATEGORY_SELECT' || currentMode === 'PLAY_CATEGORY'
+              ? 'text-amber-300 bg-amber-500/20'
+              : 'text-amber-200/70'
+          }`}
+        >
+          <Layers className="w-4 h-4" />
+          <span>বিষয়</span>
+        </button>
+
+        <button
+          onClick={() => {
+            sounds.playClick();
+            setCurrentMode('STORE');
+          }}
+          className={`flex flex-col items-center gap-0.5 text-[10px] font-bold py-1 px-2 rounded-lg transition-colors ${
+            currentMode === 'STORE' ? 'text-amber-300 bg-amber-500/20' : 'text-amber-200/70'
+          }`}
+        >
+          <Store className="w-4 h-4" />
+          <span>দোকান</span>
+        </button>
+
+        <button
+          onClick={() => {
+            sounds.playClick();
+            setCurrentMode('RIDDLE_BOOK');
+          }}
+          className={`flex flex-col items-center gap-0.5 text-[10px] font-bold py-1 px-2 rounded-lg transition-colors ${
+            currentMode === 'RIDDLE_BOOK' ? 'text-amber-300 bg-amber-500/20' : 'text-amber-200/70'
+          }`}
+        >
+          <BookOpen className="w-4 h-4" />
+          <span>খাতা</span>
+        </button>
+      </nav>
     </div>
   );
 }
